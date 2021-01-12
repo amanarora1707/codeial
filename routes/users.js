@@ -10,10 +10,11 @@ const usersController =require('../controllers/users_controller');  //  ../means
 //console.log("router loaded");
 //console.log("profile");
 
-router.get('/profile',passport.checkAuthentication.usersController.profile);
+router.get('/profile',passport.checkAuthentication,usersController.profile);
 router.get('/sign-up',usersController.signUp);
 router.get('/sign-in',usersController.signIn);
 router.post('/create',usersController.create);
+router.get('/sign-out',usersController.destroySession);
 
 //use passport as middleware to authenticate
 router.post('/create-session',passport.authenticate(

@@ -7,12 +7,12 @@ const User = require('../models/user');
 //authentication using passport
 
 passport.use(new LocalStrategy({
-    usernameField: 'email'
+    usernameField: 'email'    //unique thing in our schema for every user
 },
 function(email,password,done){      //done is function that can take two arguments
 
               //find a user and establish the identity
-              User.findOne({email:email} ,function(err,user){ 
+              User.findOne({email:email} ,function(err,user){   //1st email is property we are looking at and 2nd one is value that is passed on that we have to check
                   if(err){
                       console.log('Error in finding user -->Passport');
                       return done(err);
@@ -56,7 +56,7 @@ passport.deserializeUser(function(id,done){
     }
 
     //if the user is not signed in
-    return res.redirect('users/sign-in');
+    return res.redirect('/users/sign-in');
  }
 
  passport.setAuthenticatedUser =function(req,res,next){  //middleware
@@ -68,5 +68,5 @@ passport.deserializeUser(function(id,done){
     }
     next();
  }
-
+ 
 module.exports=passport;

@@ -1,20 +1,32 @@
 <html>
-    <head>
 
-        <title>
-            <%=title %>
+<head>
 
-        </title>
-        <link rel="stylesheet" href="/css/layout.css">
-        <%- style %>
-    </head>
+    <title>
+        <%=title %>
 
-    <body>
-        <%- include('_header'); %> <!--fixed part from partials-->
-        <%-body%>                   <!--variable part-->
-        <%- include('_footer'); %> <!--fixed part from partials-->
+    </title>
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <%- style %>
+</head>
+
+<body>
+    <%- include('_header'); %>
+        <!--fixed part from partials-->
+        <main id="layout-main">
+            
+            <%-body%>
+                <!--variable part-->
+
+        </main>
+
+        <%- include('_footer'); %>
+            <!--fixed part from partials-->
 
 
-        <%- script %>
-    </body>
+            <%- script %>
+</body>
+
 </html>
