@@ -22,4 +22,26 @@ module.exports.create =function(req,res){
                    });
                }
             });
+
 }
+
+module.exports.destroy =function(req,res){
+    Comment.findById(req.params.id ,function(err,comment){     //finding comment by id
+        if(comment.user ==req.user.id){  //if user is same as who created that comment
+
+            let postId =comment.post; //save postid of comment
+
+            comment.remove(); //removing comment
+
+            Post.findByIdAndUpdate(postId ,{ $pull :{comments : req.params.id}},function(err,post){ //finding comment in array in post comment and deleting
+                return res.redirect('back');
+            })
+        
+        }
+        else{
+            return res.redirect('back');
+        }
+        });
+    }
+
+
