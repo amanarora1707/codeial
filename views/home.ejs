@@ -15,6 +15,13 @@
 
                               <li>
                                    <p>
+                                        <% if (locals.user &&  locals.user.id == post.user.id){ %>  <!--if user os loged in and user who created post is same as logged in user then only show delete option-->
+
+                                        <small>
+                                             <a href="/posts/destroy/<%= post.id%>">X</a>
+                                        </small>
+
+                                        <% } %>
                                         <%= post.content %>
                                              <br>
                                              <small>
