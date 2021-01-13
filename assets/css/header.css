@@ -1,5 +1,7 @@
 header {
-  background-color: lightblue; }
+  background-color: lightblue;
+  position: fixed;
+  width: 100%; }
   header label.logo {
     color: white;
     font-size: 2rem;
