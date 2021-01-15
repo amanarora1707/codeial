@@ -11,6 +11,7 @@ const usersController =require('../controllers/users_controller');  //  ../means
 //console.log("profile");
 
 router.get('/profile/:id',passport.checkAuthentication,usersController.profile);
+router.post('/update/:id',passport.checkAuthentication,usersController.update);
 router.get('/sign-up',usersController.signUp);
 router.get('/sign-in',usersController.signIn);
 router.post('/create',usersController.create);
