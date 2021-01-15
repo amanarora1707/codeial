@@ -1,0 +1,38 @@
+<li>
+    <p>
+         <% if (locals.user &&  locals.user.id == post.user.id){ %>  <!--if user os loged in and user who created post is same as logged in user then only show delete option-->
+
+         <small>
+              <a href="/posts/destroy/<%= post.id%>">X</a>
+         </small>
+
+         <% } %>
+         <%= post.content %>
+              <br>
+              <small>
+                   <%= post.user.name %>
+              </small>
+    </p>
+    <div class="post-comments">
+         <% if(locals.user) { %>
+              <!--to show this form only to people who are login-->
+              <form action="/comments/create" method="POST">
+              <input type="text" name="content" placeholder="Type here to add Comment">
+              <input type="hidden" name="post" value="<%= post._id %>">
+              <input type="submit" value="Add">
+              </form>
+
+             <% } %>
+             <div class="post-comments-list">
+
+              <ul id="post-comments-<%= post._id %>">
+                   <% for(comment of post.comments) {%>
+
+                       <%- include('_comment')-%>
+                        <% } %>
+
+
+              </ul>
+         </div>
+    </div>
+</li>

@@ -1,6 +1,7 @@
 const Comment =require('../models/comment');
 const Post= require('../models/post');
-const { post } = require('../routes');
+const User =require('../models/user');
+
 
 module.exports.create =function(req,res){
 
@@ -26,8 +27,9 @@ module.exports.create =function(req,res){
 }
 
 module.exports.destroy =function(req,res){
-    Comment.findById(req.params.id ,function(err,comment){     //finding comment by id
-        if(comment.user ==req.user.id){  //if user is same as who created that comment
+    
+    Comment.findById(req.params.id ).populate('post').exec(function(err,comment){     //finding comment by id
+        if((comment.user ==req.user.id ) || ( comment.post.user == req.user.id)){  //if user is same as who created that comment or user whose post is this
 
             let postId =comment.post; //save postid of comment
 

@@ -1,0 +1,16 @@
+<li>
+    <p>
+        <% if( (locals.user &&  locals.user.id == comment.user.id) || (locals.user && locals.user.id == post.user.id)){ %>  <!--if user is loged in and user who created post is same as logged in user then only show delete option-->
+                                                                                                                          <!--also provide right to user to delete comments of others in his/her posts-->
+             <small>
+                  <a href="/comments/destroy/<%= comment.id%>">X</a>
+             </small>
+
+             <% } %>
+        <%=comment.content%>
+        <br>
+        <small>
+             <%= comment.user.name %>
+        </small>
+   </p>
+</li>
