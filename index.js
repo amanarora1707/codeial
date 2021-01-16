@@ -13,6 +13,9 @@ const passportLocal= require('./config/passport-local-strategy');
 const MongoStore= require('connect-mongo')(session);
 const sassMiddleware =require('node-sass-middleware');
 
+const flash=require('connect-flash');
+const customMware =require('./config/middleware');
+
 
 app.use(sassMiddleware({
     src:'./assets/scss',
@@ -74,8 +77,10 @@ app.use(passport.session());
 app.use(passport.setAuthenticatedUser); //this middleware in passport local strategy in config it is basically as when app is initialised 
                             //passport get initialised and it will check if session cookie is present
 
+app.use(flash()); //setting after pass port session as it use session cookie
 
-
+app.use(customMware.setFlash);
+app.use('/',require('./routes')); 
 //use express router
 app.use('/', require('./routes'));
 app.listen( port,function(err){
