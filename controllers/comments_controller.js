@@ -17,13 +17,13 @@ module.exports.create = async function (req, res) {
             });
             post.comments.push(comment);
             post.save();
-
+            req.flash('success','Comment added');//adding flash message with help of middleware
             res.redirect('/');
         };
     }
     catch (err) {
-        console.log('Error', err);
-        return;
+        req.flash('error',err);
+        return res.redirect('back');//adding flash message with help of middleware
 
 
     }
@@ -43,7 +43,8 @@ module.exports.destroy = async function (req, res) {
         comment.remove(); //removing comment
 
       let post= await  Post.findByIdAndUpdate(postId, { $pull: { comments: req.params.id }} )  //finding comment in array in post comment and deleting
-            return res.redirect('back');
+      req.flash('success','Comment removed');//adding flash message with help of middleware
+      return res.redirect('back');
         }
         else{
             return res.redirect('back');
@@ -52,8 +53,8 @@ module.exports.destroy = async function (req, res) {
     }
 
     catch(err) {
-        console.log('Error',err);
-        return;
+        req.flash('error',err);
+        return res.redirect('back');//adding flash message with help of middleware
     }
 
 }
